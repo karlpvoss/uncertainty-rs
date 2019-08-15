@@ -1,12 +1,8 @@
 pub mod uncval;
-pub mod uncvec;
+// pub mod uncvec;
 
+pub use uncval::AbUncVal;
+pub use uncval::RelUncVal;
 pub use uncval::UncVal;
-pub use uncvec::UncVec;
 
-#[derive(Debug)]
-#[cfg_attr(test, derive(PartialEq))]
-pub enum UncertaintyType {
-    Absolute,
-    Relative,
-}
+// pub use uncvec::UncVec;

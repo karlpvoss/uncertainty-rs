@@ -1,37 +1,34 @@
 use std::ops::Sub;
 
-use crate::UncVal;
+use crate::{AbUncVal, UncVal};
 
-impl Sub<UncVal> for UncVal {
-    type Output = UncVal;
+impl Sub<AbUncVal> for AbUncVal {
+    type Output = AbUncVal;
 
     fn sub(self, other: Self) -> Self::Output {
-        let one = self.as_ab();
-        let two = other.as_ab();
-
-        UncVal::ab(one.val - two.val, one.unc + two.unc)
+        UncVal::ab(self.val - other.val, self.unc + other.unc)
     }
 }
 
-impl Sub<f64> for UncVal {
-    type Output = UncVal;
+impl Sub<f64> for AbUncVal {
+    type Output = AbUncVal;
 
     fn sub(self, other: f64) -> Self::Output {
-        self - UncVal::from(other)
+        self - AbUncVal::from(other)
     }
 }
 
-impl Sub<UncVal> for f64 {
-    type Output = UncVal;
+impl Sub<AbUncVal> for f64 {
+    type Output = AbUncVal;
 
-    fn sub(self, other: UncVal) -> Self::Output {
-        other - UncVal::from(self)
+    fn sub(self, other: AbUncVal) -> Self::Output {
+        other - AbUncVal::from(self)
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::{UncVal, UncertaintyType};
+    use crate::UncVal;
     use approx::assert_abs_diff_eq;
 
     #[test]
@@ -42,7 +39,6 @@ mod tests {
 
         assert_abs_diff_eq!(diff.val, -1.0);
         assert_abs_diff_eq!(diff.unc, 0.3);
-        assert_eq!(diff.ty, UncertaintyType::Absolute);
     }
 
     #[test]
@@ -53,7 +49,6 @@ mod tests {
 
         assert_abs_diff_eq!(diff.val, -1.0);
         assert_abs_diff_eq!(diff.unc, 0.1);
-        assert_eq!(diff.ty, UncertaintyType::Absolute);
     }
 
     #[test]
@@ -64,6 +59,5 @@ mod tests {
 
         assert_abs_diff_eq!(diff.val, -1.0);
         assert_abs_diff_eq!(diff.unc, 0.1);
-        assert_eq!(diff.ty, UncertaintyType::Absolute);
     }
 }
