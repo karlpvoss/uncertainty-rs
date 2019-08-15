@@ -1,4 +1,5 @@
 pub mod add;
+pub mod convert;
 pub mod sub;
 
 use crate::UncertaintyType;

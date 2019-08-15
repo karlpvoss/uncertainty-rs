@@ -17,7 +17,7 @@ impl Sub<f64> for UncVal {
     type Output = UncVal;
 
     fn sub(self, other: f64) -> Self::Output {
-        sub_unc_and_float(self, other)
+        self - UncVal::from(other)
     }
 }
 
@@ -25,12 +25,8 @@ impl Sub<UncVal> for f64 {
     type Output = UncVal;
 
     fn sub(self, other: UncVal) -> Self::Output {
-        sub_unc_and_float(other, self)
+        other - UncVal::from(self)
     }
-}
-
-fn sub_unc_and_float(unc: UncVal, float: f64) -> UncVal {
-    unc - UncVal::ab(float, 0.0)
 }
 
 #[cfg(test)]

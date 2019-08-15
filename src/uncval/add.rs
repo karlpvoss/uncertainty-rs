@@ -17,19 +17,15 @@ impl Add<f64> for UncVal {
     type Output = Self;
 
     fn add(self, other: f64) -> Self {
-        add_unc_and_float(self, other)
+        self + UncVal::from(other)
     }
 }
 
 impl Add<UncVal> for f64 {
     type Output = UncVal;
     fn add(self, other: UncVal) -> Self::Output {
-        add_unc_and_float(other, self)
+        other + UncVal::from(self)
     }
-}
-
-fn add_unc_and_float(unc: UncVal, float: f64) -> UncVal {
-    unc.as_ab() + UncVal::ab(float, 0.0)
 }
 
 #[cfg(test)]
