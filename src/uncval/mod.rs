@@ -9,18 +9,28 @@ use std::fmt;
 #[derive(Debug, Copy, Clone)]
 pub struct UncVal;
 
-pub trait UncertainValue {
+pub trait UncertainValue: Sized + Copy {
     fn as_ab(self) -> AbUncVal;
     fn as_rel(self) -> RelUncVal;
     fn val(&self) -> f64;
     fn unc(&self) -> f64;
 
     fn min(&self) -> f64 {
-        self.val() - self.unc()
+        let x = self.as_ab();
+        x.val() - x.unc()
     }
 
     fn max(&self) -> f64 {
-        self.val() + self.unc()
+        let x = self.as_ab();
+        x.val() + x.unc()
+    }
+
+    fn overlap<T: UncertainValue>(&self, other: &T) -> bool {
+        if self.val() > other.val() {
+            self.min() <= other.max()
+        } else {
+            self.max() >= other.min()
+        }
     }
 }
 
@@ -166,5 +176,22 @@ mod tests {
         assert_eq!(x.clone().as_ab(), UncVal::ab(10.0, 0.5));
         assert_eq!(x.val(), 10.0);
         assert_eq!(x.unc(), 0.05);
+    }
+
+    #[test]
+    fn test_trait_min() {
+        assert_abs_diff_eq!(9.5, UncVal::ab(10.0, 0.5).min());
+    }
+
+    #[test]
+    fn test_trait_max() {
+        assert_abs_diff_eq!(101.0, UncVal::rel(100.0, 0.01).max());
+    }
+
+    #[test]
+    fn test_traitoverlap() {
+        let one = UncVal::ab(10.0, 0.6);
+        let two = UncVal::ab(11.0, 0.5);
+        assert!(one.overlap(&two));
     }
 }
