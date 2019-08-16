@@ -4,5 +4,6 @@ pub mod uncval;
 pub use uncval::AbUncVal;
 pub use uncval::RelUncVal;
 pub use uncval::UncVal;
+pub use uncval::UncertainValue;
 
 // pub use uncvec::UncVec;

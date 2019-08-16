@@ -1,5 +1,7 @@
 pub mod add;
 pub mod convert;
+pub mod div;
+pub mod mul;
 pub mod sub;
 
 #[derive(Debug, Copy, Clone)]
@@ -8,18 +10,20 @@ pub struct UncVal;
 pub trait UncertainValue {
     fn as_ab(self) -> AbUncVal;
     fn as_rel(self) -> RelUncVal;
+    fn val(&self) -> f64;
+    fn unc(&self) -> f64;
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct AbUncVal {
-    pub val: f64,
-    pub unc: f64,
+    val: f64,
+    unc: f64,
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct RelUncVal {
-    pub val: f64,
-    pub unc: f64,
+    val: f64,
+    unc: f64,
 }
 
 impl UncVal {
@@ -43,6 +47,14 @@ impl UncertainValue for AbUncVal {
             unc: self.unc / self.val,
         }
     }
+
+    fn val(&self) -> f64 {
+        self.val
+    }
+
+    fn unc(&self) -> f64 {
+        self.unc
+    }
 }
 
 impl UncertainValue for RelUncVal {
@@ -52,6 +64,14 @@ impl UncertainValue for RelUncVal {
 
     fn as_rel(self) -> RelUncVal {
         self
+    }
+
+    fn val(&self) -> f64 {
+        self.val
+    }
+
+    fn unc(&self) -> f64 {
+        self.unc
     }
 }
 
@@ -83,5 +103,23 @@ mod tests {
 
         assert_abs_diff_eq!(eq.val, -5.5);
         assert_abs_diff_eq!(eq.unc, 2.5);
+    }
+
+    #[test]
+    fn test_trait_ab() {
+        let x = UncVal::ab(10.0, 0.5);
+
+        assert_eq!(x.clone().as_rel(), UncVal::rel(10.0, 0.05));
+        assert_eq!(x.val(), 10.0);
+        assert_eq!(x.unc(), 0.5);
+    }
+
+    #[test]
+    fn test_trait_rel() {
+        let x = UncVal::rel(10.0, 0.05);
+
+        assert_eq!(x.clone().as_ab(), UncVal::ab(10.0, 0.5));
+        assert_eq!(x.val(), 10.0);
+        assert_eq!(x.unc(), 0.05);
     }
 }
