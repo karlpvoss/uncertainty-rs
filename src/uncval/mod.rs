@@ -4,6 +4,8 @@ pub mod div;
 pub mod mul;
 pub mod sub;
 
+use std::fmt;
+
 #[derive(Debug, Copy, Clone)]
 pub struct UncVal;
 
@@ -12,6 +14,14 @@ pub trait UncertainValue {
     fn as_rel(self) -> RelUncVal;
     fn val(&self) -> f64;
     fn unc(&self) -> f64;
+
+    fn min(&self) -> f64 {
+        self.val() - self.unc()
+    }
+
+    fn max(&self) -> f64 {
+        self.val() + self.unc()
+    }
 }
 
 #[derive(Debug, Copy, Clone, PartialEq)]
@@ -72,6 +82,18 @@ impl UncertainValue for RelUncVal {
 
     fn unc(&self) -> f64 {
         self.unc
+    }
+}
+
+impl fmt::Display for AbUncVal {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{} ± {}", self.val, self.unc)
+    }
+}
+
+impl fmt::Display for RelUncVal {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{} ± {}%", self.val, self.unc * 100.0)
     }
 }
 
