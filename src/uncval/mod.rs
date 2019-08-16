@@ -106,6 +106,29 @@ mod tests {
     }
 
     #[test]
+    fn test_div_and_mul() {
+        let one = UncVal::rel(20.0, 0.05);
+        let two = 2.0;
+        let three = UncVal::ab(3.5, 0.35); // 0.35 ab uncertainty is 10%
+        let eq = one / two * three.as_rel();
+
+        assert_abs_diff_eq!(eq.val(), 35.0);
+        assert_abs_diff_eq!(eq.unc(), 0.15);
+    }
+
+    #[test]
+    fn test_all_ops() {
+        let two = UncVal::ab(2.0, 0.02);
+        let three = UncVal::ab(3.0, 0.03);
+        let four = RelUncVal::from(4.0);
+        let five = UncVal::rel(5.0, 0.1);
+        let eq = ((two + three).as_rel() / five * four).as_ab() - two;
+
+        assert_abs_diff_eq!(eq.val(), 2.0);
+        assert_abs_diff_eq!(eq.unc(), 0.46);
+    }
+
+    #[test]
     fn test_trait_ab() {
         let x = UncVal::ab(10.0, 0.5);
 
