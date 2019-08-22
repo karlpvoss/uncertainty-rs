@@ -34,8 +34,8 @@ mod tests {
     #[test]
     fn ab_from_f64() {
         let x: AbUncVal = 1.0.into();
-        assert_abs_diff_eq!(x.val, 1.0);
-        assert_abs_diff_eq!(x.unc, 0.0);
+        assert_abs_diff_eq!(x.val(), 1.0);
+        assert_abs_diff_eq!(x.unc(), 0.0);
     }
 
     #[test]

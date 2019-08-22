@@ -1,12 +1,12 @@
 use std::ops::Add;
 
-use crate::{AbUncVal, UncVal};
+use crate::{AbUncVal, UncVal, UncertainValue};
 
 impl Add<AbUncVal> for AbUncVal {
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
-        UncVal::ab(self.val + other.val, self.unc + other.unc)
+        UncVal::ab(self.val() + other.val(), self.unc() + other.unc())
     }
 }
 
@@ -28,7 +28,7 @@ impl Add<AbUncVal> for f64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::UncVal;
+    use crate::{UncVal, UncertainValue};
     use approx::assert_abs_diff_eq;
 
     #[test]
@@ -37,8 +37,8 @@ mod tests {
         let two = UncVal::ab(2.0, 0.2);
         let sum = one + two;
 
-        assert_abs_diff_eq!(sum.val, 3.0);
-        assert_abs_diff_eq!(sum.unc, 0.3);
+        assert_abs_diff_eq!(sum.val(), 3.0);
+        assert_abs_diff_eq!(sum.unc(), 0.3);
     }
 
     #[test]
@@ -47,8 +47,8 @@ mod tests {
         let two = 2.0;
         let sum = one + two;
 
-        assert_abs_diff_eq!(sum.val, 3.0);
-        assert_abs_diff_eq!(sum.unc, 0.1);
+        assert_abs_diff_eq!(sum.val(), 3.0);
+        assert_abs_diff_eq!(sum.unc(), 0.1);
     }
 
     #[test]
@@ -57,7 +57,7 @@ mod tests {
         let two = UncVal::ab(1.0, 0.1);
         let sum = one + two;
 
-        assert_abs_diff_eq!(sum.val, 3.0);
-        assert_abs_diff_eq!(sum.unc, 0.1);
+        assert_abs_diff_eq!(sum.val(), 3.0);
+        assert_abs_diff_eq!(sum.unc(), 0.1);
     }
 }

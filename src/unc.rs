@@ -28,13 +28,15 @@ pub trait UncertainValue: Sized + Copy {
     }
 }
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone)]
+#[cfg_attr(test, derive(PartialEq))]
 pub struct AbUncVal {
     val: f64,
     unc: f64,
 }
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone)]
+#[cfg_attr(test, derive(PartialEq))]
 pub struct RelUncVal {
     val: f64,
     unc: f64,
