@@ -1,6 +1,6 @@
 use std::convert::From;
 
-use crate::{AbUncVal, RelUncVal, UncVal, UncertainValue};
+use crate::*;
 
 impl From<f64> for AbUncVal {
     fn from(float: f64) -> AbUncVal {

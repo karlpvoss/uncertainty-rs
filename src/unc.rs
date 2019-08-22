@@ -1,46 +1,7 @@
-use std::fmt;
+use crate::*;
 
 #[derive(Debug, Copy, Clone)]
 pub struct UncVal;
-
-pub trait UncertainValue: Sized + Copy {
-    fn as_ab(self) -> AbUncVal;
-    fn as_rel(self) -> RelUncVal;
-    fn val(&self) -> f64;
-    fn unc(&self) -> f64;
-
-    fn min(&self) -> f64 {
-        let x = self.as_ab();
-        x.val() - x.unc()
-    }
-
-    fn max(&self) -> f64 {
-        let x = self.as_ab();
-        x.val() + x.unc()
-    }
-
-    fn overlap<T: UncertainValue>(&self, other: &T) -> bool {
-        if self.val() > other.val() {
-            self.min() <= other.max()
-        } else {
-            self.max() >= other.min()
-        }
-    }
-}
-
-#[derive(Debug, Copy, Clone)]
-#[cfg_attr(test, derive(PartialEq))]
-pub struct AbUncVal {
-    val: f64,
-    unc: f64,
-}
-
-#[derive(Debug, Copy, Clone)]
-#[cfg_attr(test, derive(PartialEq))]
-pub struct RelUncVal {
-    val: f64,
-    unc: f64,
-}
 
 impl UncVal {
     pub fn ab(val: f64, unc: f64) -> AbUncVal {
@@ -49,57 +10,6 @@ impl UncVal {
 
     pub fn rel(val: f64, unc: f64) -> RelUncVal {
         RelUncVal { val, unc }
-    }
-}
-
-impl UncertainValue for AbUncVal {
-    fn as_ab(self) -> AbUncVal {
-        self
-    }
-
-    fn as_rel(self) -> RelUncVal {
-        RelUncVal {
-            val: self.val,
-            unc: self.unc / self.val,
-        }
-    }
-
-    fn val(&self) -> f64 {
-        self.val
-    }
-
-    fn unc(&self) -> f64 {
-        self.unc
-    }
-}
-
-impl UncertainValue for RelUncVal {
-    fn as_ab(self) -> AbUncVal {
-        UncVal::ab(self.val, self.unc * self.val)
-    }
-
-    fn as_rel(self) -> RelUncVal {
-        self
-    }
-
-    fn val(&self) -> f64 {
-        self.val
-    }
-
-    fn unc(&self) -> f64 {
-        self.unc
-    }
-}
-
-impl fmt::Display for AbUncVal {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{} ± {}", self.val, self.unc)
-    }
-}
-
-impl fmt::Display for RelUncVal {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{} ± {}%", self.val, self.unc * 100.0)
     }
 }
 
