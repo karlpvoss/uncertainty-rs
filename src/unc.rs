@@ -1,13 +1,47 @@
 use crate::*;
 
+/// UncVal, or an Uncertain Value is a way of representing a numerical value of which the true
+/// value is not known. The the uncertainty can be expressed using absolute uncertainty,
+/// [ab()](struct.UncVal.html#method.ab), or relative uncertainty,
+/// [rel()](struct.UncVal.html#method.rel).
+///
+/// These can look like so:
+///
+/// Absolute: 14.6 ± 0.2 mm
+///
+/// Relative: 14.7 ± 0.01369%
+///
+/// It should be apparent upon inspection that these two measurements are equal to each other, even
+/// though they slightly differ in value. This is because there is some overlap between the two
+/// measurements when the uncertainty value is considered. This can be determined as follows:
+///
+/// ```
+/// let one = UncVal::ab(14.6, 0.2);
+/// let two = UncVal::rel(14.7, 0.01369);
+/// assert!(one.overlap(two));
+/// ```
 #[derive(Debug, Copy, Clone)]
 pub struct UncVal;
 
 impl UncVal {
+    /// ```
+    /// use uncertainty_rs::*;
+    ///
+    /// let u: AbUncVal = UncVal::ab(10.0, 1.0);
+    /// assert_eq!(u.val(), 10.0);
+    /// assert_eq!(u.unc(), 1.0);
+    /// ```
     pub fn ab(val: f64, unc: f64) -> AbUncVal {
         AbUncVal { val, unc }
     }
 
+    /// ```
+    /// use uncertainty_rs::*;
+    ///
+    /// let u: RelUncVal = UncVal::rel(10.0, 0.1);
+    /// assert_eq!(u.val(), 10.0);
+    /// assert_eq!(u.unc(), 0.1);
+    /// ```
     pub fn rel(val: f64, unc: f64) -> RelUncVal {
         RelUncVal { val, unc }
     }
@@ -17,20 +51,6 @@ impl UncVal {
 mod tests {
     use super::*;
     use approx::assert_abs_diff_eq;
-
-    #[test]
-    fn test_ab_constructor() {
-        let u: AbUncVal = UncVal::ab(10.0, 1.0);
-        assert_eq!(u.val, 10.0);
-        assert_eq!(u.unc, 1.0);
-    }
-
-    #[test]
-    fn test_rel_constructor() {
-        let u: RelUncVal = UncVal::rel(10.0, 0.1);
-        assert_eq!(u.val, 10.0);
-        assert_eq!(u.unc, 0.1);
-    }
 
     #[test]
     fn test_add_and_sub() {
