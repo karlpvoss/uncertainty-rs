@@ -9,8 +9,8 @@ pub mod r#trait;
 pub mod unc;
 pub mod vec;
 
-pub use abunc::AbUncVal;
+pub use abunc::AbUnc;
 pub use r#trait::UncertainValue;
-pub use relunc::RelUncVal;
-pub use unc::UncVal;
+pub use relunc::RelUnc;
+pub use unc::Unc;
 pub use vec::UncVec;

@@ -3,17 +3,17 @@ use std::fmt;
 
 #[derive(Debug, Copy, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
-pub struct RelUncVal {
+pub struct RelUnc {
     pub(crate) val: f64,
     pub(crate) unc: f64,
 }
 
-impl UncertainValue for RelUncVal {
-    fn as_ab(self) -> AbUncVal {
-        UncVal::ab(self.val, self.unc * self.val)
+impl UncertainValue for RelUnc {
+    fn as_ab(self) -> AbUnc {
+        Unc::ab(self.val, self.unc * self.val)
     }
 
-    fn as_rel(self) -> RelUncVal {
+    fn as_rel(self) -> RelUnc {
         self
     }
 
@@ -26,7 +26,7 @@ impl UncertainValue for RelUncVal {
     }
 }
 
-impl fmt::Display for RelUncVal {
+impl fmt::Display for RelUnc {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{} ± {}%", self.val, self.unc * 100.0)
     }

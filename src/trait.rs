@@ -1,8 +1,8 @@
-use crate::{AbUncVal, RelUncVal};
+use crate::{AbUnc, RelUnc};
 
 pub trait UncertainValue: Sized + Copy {
-    fn as_ab(self) -> AbUncVal;
-    fn as_rel(self) -> RelUncVal;
+    fn as_ab(self) -> AbUnc;
+    fn as_rel(self) -> RelUnc;
     fn val(&self) -> f64;
     fn unc(&self) -> f64;
 
