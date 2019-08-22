@@ -1,9 +1,8 @@
-pub mod uncval;
-// pub mod uncvec;
+pub mod unc;
+pub mod add;
+pub mod convert;
+pub mod div;
+pub mod mul;
+pub mod sub;
 
-pub use uncval::AbUncVal;
-pub use uncval::RelUncVal;
-pub use uncval::UncVal;
-pub use uncval::UncertainValue;
-
-// pub use uncvec::UncVec;
+pub use unc::{UncVal, UncertainValue, AbUncVal, RelUncVal};
