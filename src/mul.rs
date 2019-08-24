@@ -1,40 +1,40 @@
 use std::ops::Mul;
 
-use crate::{RelUncVal, UncVal, UncertainValue};
+use crate::{RelUnc, Unc, UncertainValue};
 
-impl Mul<RelUncVal> for RelUncVal {
-    type Output = RelUncVal;
+impl Mul<RelUnc> for RelUnc {
+    type Output = RelUnc;
 
-    fn mul(self, other: RelUncVal) -> Self::Output {
-        UncVal::rel(self.val() * other.val(), self.unc() + other.unc())
+    fn mul(self, other: RelUnc) -> Self::Output {
+        Unc::rel(self.val() * other.val(), self.unc() + other.unc())
     }
 }
 
-impl Mul<f64> for RelUncVal {
-    type Output = RelUncVal;
+impl Mul<f64> for RelUnc {
+    type Output = RelUnc;
 
     fn mul(self, other: f64) -> Self::Output {
-        self * RelUncVal::from(other)
+        self * RelUnc::from(other)
     }
 }
 
-impl Mul<RelUncVal> for f64 {
-    type Output = RelUncVal;
+impl Mul<RelUnc> for f64 {
+    type Output = RelUnc;
 
-    fn mul(self, other: RelUncVal) -> Self::Output {
-        other * RelUncVal::from(self)
+    fn mul(self, other: RelUnc) -> Self::Output {
+        other * RelUnc::from(self)
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::{UncVal, UncertainValue};
+    use crate::{Unc, UncertainValue};
     use approx::assert_abs_diff_eq;
 
     #[test]
     fn test_both_unc() {
-        let one = UncVal::rel(1.0, 0.1);
-        let two = UncVal::rel(2.0, 0.1);
+        let one = Unc::rel(1.0, 0.1);
+        let two = Unc::rel(2.0, 0.1);
         let prod = one * two;
 
         assert_abs_diff_eq!(prod.val(), 2.0);
@@ -43,7 +43,7 @@ mod tests {
 
     #[test]
     fn test_left_unc() {
-        let one = UncVal::rel(1.0, 0.1);
+        let one = Unc::rel(1.0, 0.1);
         let two = 2.0;
         let prod = one * two;
 
@@ -54,7 +54,7 @@ mod tests {
     #[test]
     fn test_right_unc() {
         let one = 2.0;
-        let two = UncVal::rel(1.0, 0.1);
+        let two = Unc::rel(1.0, 0.1);
         let prod = one * two;
 
         assert_abs_diff_eq!(prod.val(), 2.0);
