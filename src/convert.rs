@@ -28,7 +28,7 @@ impl From<AbUnc> for RelUnc {
 
 #[cfg(test)]
 mod tests {
-    use crate::{AbUnc, RelUnc, Unc, UncertainValue};
+    use crate::*;
     use approx::assert_abs_diff_eq;
 
     #[test]

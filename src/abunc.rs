@@ -8,7 +8,7 @@ pub struct AbUnc {
     pub(crate) unc: f64,
 }
 
-impl UncertainValue for AbUnc {
+impl Uncertainty for AbUnc {
     fn as_ab(self) -> AbUnc {
         self
     }
