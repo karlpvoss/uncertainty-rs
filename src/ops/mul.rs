@@ -1,6 +1,6 @@
 use std::ops::Mul;
 
-use crate::{RelUnc, Unc, UncertainValue};
+use crate::*;
 
 impl Mul<RelUnc> for RelUnc {
     type Output = RelUnc;
@@ -28,7 +28,7 @@ impl Mul<RelUnc> for f64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::{Unc, UncertainValue};
+    use crate::*;
     use approx::assert_abs_diff_eq;
 
     #[test]

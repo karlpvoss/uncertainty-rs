@@ -1,6 +1,6 @@
 use std::ops::Sub;
 
-use crate::{AbUnc, Unc, UncertainValue};
+use crate::*;
 
 impl Sub<AbUnc> for AbUnc {
     type Output = AbUnc;
@@ -28,7 +28,7 @@ impl Sub<AbUnc> for f64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::{Unc, UncertainValue};
+    use crate::*;
     use approx::assert_abs_diff_eq;
 
     #[test]

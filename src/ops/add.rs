@@ -1,6 +1,6 @@
 use std::ops::Add;
 
-use crate::{AbUnc, Unc, UncertainValue};
+use crate::*;
 
 impl Add<AbUnc> for AbUnc {
     type Output = Self;
@@ -28,7 +28,7 @@ impl Add<AbUnc> for f64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::{Unc, UncertainValue};
+    use crate::*;
     use approx::assert_abs_diff_eq;
 
     #[test]

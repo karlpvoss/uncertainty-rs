@@ -1,6 +1,6 @@
 use std::ops::Div;
 
-use crate::{RelUnc, Unc, UncertainValue};
+use crate::*;
 
 impl Div<RelUnc> for RelUnc {
     type Output = RelUnc;
@@ -28,7 +28,7 @@ impl Div<RelUnc> for f64 {
 
 #[cfg(test)]
 mod tests {
-    use crate::{Unc, UncertainValue};
+    use crate::*;
     use approx::assert_abs_diff_eq;
 
     #[test]
