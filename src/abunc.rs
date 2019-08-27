@@ -3,7 +3,7 @@ use std::fmt;
 #[cfg(feature = "serde")]
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Hash)]
 #[cfg_attr(test, derive(PartialEq))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct AbUnc {
