@@ -28,7 +28,7 @@ impl RelUnc {
     pub fn powi(self, power: i32) -> RelUnc {
         RelUnc {
             val: self.val.powi(power),
-            unc: self.unc * (power as f64),
+            unc: self.unc * f64::from(power),
         }
     }
 
