@@ -5,6 +5,7 @@ use crate::*;
 impl Mul<RelUnc> for RelUnc {
     type Output = RelUnc;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn mul(self, other: RelUnc) -> Self::Output {
         Unc::rel(self.val() * other.val(), self.unc() + other.unc())
     }

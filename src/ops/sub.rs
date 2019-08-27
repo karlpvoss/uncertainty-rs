@@ -5,6 +5,7 @@ use crate::*;
 impl Sub<AbUnc> for AbUnc {
     type Output = AbUnc;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn sub(self, other: Self) -> Self::Output {
         Unc::ab(self.val() - other.val(), self.unc() + other.unc())
     }
