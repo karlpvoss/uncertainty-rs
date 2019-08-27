@@ -6,6 +6,8 @@ impl UncVec {
     /// This is a method which allows the conversion of a list of values into a list of absolute
     /// uncertainties, each with the same uncertainty value.
     ///
+    /// # Examples
+    ///
     /// ```
     /// use uncertainty_rs::Uncertainty;
     /// use uncertainty_rs::vec::UncVec;
@@ -27,6 +29,8 @@ impl UncVec {
 
     /// This is a method which allows the conversion of a list of values into a list of relative
     /// uncertainties, each with the same uncertainty value.
+    ///
+    /// # Examples
     ///
     /// ```
     /// use uncertainty_rs::Uncertainty;

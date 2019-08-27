@@ -1,5 +1,5 @@
-//! Unc, or an Uncertain Value is a way of representing a numerical value of which the true
-//! value is not known. The the uncertainty can be expressed using absolute uncertainty,
+//! Unc, or an Uncertainty is a way of representing a numerical value of which the true
+//! value is not known. The uncertainty can be expressed using absolute uncertainty,
 //! [ab()](unc/struct.Unc.html#method.ab), or relative uncertainty,
 //! [rel()](unc/struct.Unc.html#method.rel).
 //!
@@ -69,6 +69,18 @@
 //!
 //! print(AbUnc::from(10.0));
 //! print(RelUnc::from(20.0));
+//! ```
+//!
+//! However, if you only want to accept specifically Relative or Absolute uncertain values, you can
+//! do this by using the AbUnc and RelUnc types:
+//!
+//! ```
+//! # use uncertainty_rs::*;
+//! fn print_ab(x: AbUnc) {
+//!     println!("The value of this absolute uncertainty is: {}", x.val());
+//! }
+//!
+//! print_ab(Unc::ab(14.7, 0.02));
 //! ```
 
 pub mod abunc;
