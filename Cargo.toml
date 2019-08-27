@@ -8,8 +8,8 @@ license-file = "LICENSE"
 description = "A crate to allow the creation and arithmetic operations on numbers with uncertain values."
 keywords = ["float", "uncertain", "arithmetic", "absolute", "relative"]
 repository = "https://github.com/karlpvoss/uncertainty-rs"
-homepage = "karlpvoss.com/projects/uncertainty-rs"
-documentation = "karlpvoss.com/projects/uncertainty-rs/docs"
+homepage = "http://karlpvoss.com/projects/uncertainty-rs"
+documentation = "http://karlpvoss.com/projects/uncertainty-rs/docs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
