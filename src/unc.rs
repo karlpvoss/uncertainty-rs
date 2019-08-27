@@ -13,7 +13,7 @@ impl Unc {
     /// # Examples
     ///
     /// ```
-    /// use uncertainty_rs::*;
+    /// use uncertainty::*;
     ///
     /// let u: AbUnc = Unc::ab(10.0, 1.0);
     /// assert_eq!(u.val(), 10.0);
@@ -29,7 +29,7 @@ impl Unc {
     /// # Examples
     ///
     /// ```
-    /// use uncertainty_rs::*;
+    /// use uncertainty::*;
     ///
     /// let u: RelUnc = Unc::rel(10.0, 0.1);
     /// assert_eq!(u.val(), 10.0);

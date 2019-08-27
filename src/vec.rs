@@ -9,8 +9,8 @@ impl UncVec {
     /// # Examples
     ///
     /// ```
-    /// use uncertainty_rs::Uncertainty;
-    /// use uncertainty_rs::vec::UncVec;
+    /// use uncertainty::Uncertainty;
+    /// use uncertainty::vec::UncVec;
     ///
     /// let vals = vec![1.0, 2.0, 3.0];
     /// let uncertainties = UncVec::ab(vals, 0.1);
@@ -33,8 +33,8 @@ impl UncVec {
     /// # Examples
     ///
     /// ```
-    /// use uncertainty_rs::Uncertainty;
-    /// use uncertainty_rs::vec::UncVec;
+    /// use uncertainty::Uncertainty;
+    /// use uncertainty::vec::UncVec;
     ///
     /// let vals = vec![1.0, 2.0, 3.0];
     /// let uncertainties = UncVec::rel(vals, 0.1);

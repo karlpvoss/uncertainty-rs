@@ -14,7 +14,7 @@
 //! measurements when the uncertainty value is considered. This can be determined as follows:
 //!
 //! ```
-//! use uncertainty_rs::*;
+//! use uncertainty::*;
 //!
 //! let one = Unc::ab(14.6, 0.2);
 //! let two = Unc::rel(14.7, 0.01369);
@@ -27,7 +27,7 @@
 //! the two, you can make use of the [Uncertainty](unc/trait.Uncertainty.html) trait.
 //!
 //! ```
-//! use uncertainty_rs::*;
+//! use uncertainty::*;
 //! use approx::assert_abs_diff_eq;
 //!
 //! let one = Unc::ab(14.6, 0.2);
@@ -44,7 +44,7 @@
 //! Conversion between the types can also be done via the From trait:
 //!
 //! ```
-//! # use uncertainty_rs::*;
+//! # use uncertainty::*;
 //! # use approx::assert_abs_diff_eq;
 //! let x: AbUnc = Unc::rel(2.0, 0.1).into();
 //! assert_abs_diff_eq!(x.unc(), 0.2);
@@ -62,7 +62,7 @@
 //! the Uncertainty trait:
 //!
 //! ```
-//! # use uncertainty_rs::*;
+//! # use uncertainty::*;
 //! fn print<T: Uncertainty>(x: T) {
 //!     let x = x.to_ab();
 //!     println!("The value is: {}, and the uncertainty is: {}!", x.val(), x.unc());
@@ -76,7 +76,7 @@
 //! do this by using the AbUnc and RelUnc types:
 //!
 //! ```
-//! # use uncertainty_rs::*;
+//! # use uncertainty::*;
 //! fn print_ab(x: AbUnc) {
 //!     println!("The value of this absolute uncertainty is: {}", x.val());
 //! }

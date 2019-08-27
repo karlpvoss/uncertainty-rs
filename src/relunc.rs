@@ -18,7 +18,7 @@ impl RelUnc {
     /// # Examples
     ///
     /// ```
-    /// # use uncertainty_rs::*;
+    /// # use uncertainty::*;
     /// # use approx::assert_abs_diff_eq;
     /// let two = Unc::rel(2.0, 0.01);
     /// let eight = two.powi(3);
@@ -37,7 +37,7 @@ impl RelUnc {
     /// # Examples
     ///
     /// ```
-    /// # use uncertainty_rs::*;
+    /// # use uncertainty::*;
     /// # use approx::assert_abs_diff_eq;
     /// let two = Unc::rel(2.0, 0.01);
     /// let eight = two.powf(3.0);
