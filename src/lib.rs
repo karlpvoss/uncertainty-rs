@@ -22,8 +22,9 @@
 //! ```
 //!
 //! There are also more arithmetic operations supported; absolute uncertainties can be added and
-//! subtracted, and relative uncertainties can be multiplied and divided. To convert between the
-//! two, you can use of the [Uncertainty](unc/trait.Uncertainty.html) trait.
+//! subtracted, and relative uncertainties can be multiplied and divided. Relative uncertainties
+//! can also be raised to [powers](relunc/struct.RelUnc.html#method.powi). To convert between
+//! the two, you can make use of the [Uncertainty](unc/trait.Uncertainty.html) trait.
 //!
 //! ```
 //! use uncertainty_rs::*;
