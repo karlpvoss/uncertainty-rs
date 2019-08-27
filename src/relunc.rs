@@ -50,11 +50,11 @@ impl RelUnc {
 }
 
 impl Uncertainty for RelUnc {
-    fn as_ab(self) -> AbUnc {
+    fn to_ab(self) -> AbUnc {
         Unc::ab(self.val, self.unc * self.val)
     }
 
-    fn as_rel(self) -> RelUnc {
+    fn to_rel(self) -> RelUnc {
         self
     }
 

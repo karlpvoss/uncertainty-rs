@@ -9,11 +9,11 @@ pub struct AbUnc {
 }
 
 impl Uncertainty for AbUnc {
-    fn as_ab(self) -> AbUnc {
+    fn to_ab(self) -> AbUnc {
         self
     }
 
-    fn as_rel(self) -> RelUnc {
+    fn to_rel(self) -> RelUnc {
         RelUnc {
             val: self.val,
             unc: self.unc / self.val,

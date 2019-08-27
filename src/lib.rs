@@ -34,8 +34,8 @@
 //! let two = Unc::rel(14.7, 0.01369);
 //! let three = Unc::rel(2.0, 0.05);
 //!
-//! let eq: AbUnc = one + two.as_ab();
-//! let eq: RelUnc = eq.as_rel() * three;
+//! let eq: AbUnc = one + two.to_ab();
+//! let eq: RelUnc = eq.to_rel() * three;
 //!
 //! assert_abs_diff_eq!(eq.val(), 58.6, epsilon = 0.0000001);
 //! assert_abs_diff_eq!(eq.unc(), 0.0636943, epsilon = 0.0000001);
@@ -64,7 +64,7 @@
 //! ```
 //! # use uncertainty_rs::*;
 //! fn print<T: Uncertainty>(x: T) {
-//!     let x = x.as_ab();
+//!     let x = x.to_ab();
 //!     println!("The value is: {}, and the uncertainty is: {}!", x.val(), x.unc());
 //! }
 //!

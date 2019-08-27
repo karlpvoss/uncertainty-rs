@@ -40,9 +40,9 @@ impl Unc {
 /// Used to define behaviour for values which have uncertain values.
 pub trait Uncertainty: Sized + Copy {
     /// Convert any uncertainty value into one which has an absolute uncertain value.
-    fn as_ab(self) -> AbUnc;
+    fn to_ab(self) -> AbUnc;
     /// Convert any uncertainty value into one which has a relative uncertain value.
-    fn as_rel(self) -> RelUnc;
+    fn to_rel(self) -> RelUnc;
     /// Get the base value of the uncertainty.
     fn val(&self) -> f64;
     /// Get the uncertainty value; this will depend on whether the base type is a relative or
@@ -52,14 +52,14 @@ pub trait Uncertainty: Sized + Copy {
     /// Return the minimum possible value of the uncertainty. This is functionally the base value -
     /// the uncertainty value.
     fn min(&self) -> f64 {
-        let x = self.as_ab();
+        let x = self.to_ab();
         x.val() - x.unc()
     }
 
     /// Return the maximum possible value of the uncertainty. This is functionally the base value +
     /// the uncertainty value.
     fn max(&self) -> f64 {
-        let x = self.as_ab();
+        let x = self.to_ab();
         x.val() + x.unc()
     }
 

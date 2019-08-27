@@ -16,13 +16,13 @@ impl From<f64> for RelUnc {
 
 impl From<RelUnc> for AbUnc {
     fn from(x: RelUnc) -> AbUnc {
-        x.as_ab()
+        x.to_ab()
     }
 }
 
 impl From<AbUnc> for RelUnc {
     fn from(x: AbUnc) -> RelUnc {
-        x.as_rel()
+        x.to_rel()
     }
 }
 
@@ -47,7 +47,7 @@ mod tests {
 
     #[test]
     fn rel_from_ab() {
-        let x = Unc::ab(10.0, 1.0).as_rel();
+        let x = Unc::ab(10.0, 1.0).to_rel();
 
         assert_abs_diff_eq!(x.val(), 10.0);
         assert_abs_diff_eq!(x.unc(), 0.1);
@@ -55,7 +55,7 @@ mod tests {
 
     #[test]
     fn ab_from_rel() {
-        let x = Unc::rel(10.0, 0.1).as_ab();
+        let x = Unc::rel(10.0, 0.1).to_ab();
 
         assert_abs_diff_eq!(x.val(), 10.0);
         assert_abs_diff_eq!(x.unc(), 1.0);
