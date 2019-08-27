@@ -8,6 +8,47 @@ pub struct RelUnc {
     pub(crate) unc: f64,
 }
 
+impl RelUnc {
+    /// Raise a relative uncertainty to an integer power.
+    /// Casts the i32 to an f64 in order to calculate the change in uncertainty.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use uncertainty_rs::*;
+    /// # use approx::assert_abs_diff_eq;
+    /// let two = Unc::rel(2.0, 0.01);
+    /// let eight = two.powi(3);
+    /// assert_abs_diff_eq!(eight.val(), 8.0);
+    /// assert_abs_diff_eq!(eight.unc(), 0.03);
+    /// ```
+    pub fn powi(self, power: i32) -> RelUnc {
+        RelUnc {
+            val: self.val.powi(power),
+            unc: self.unc * (power as f64),
+        }
+    }
+
+    /// Raise a relative uncertainty to an floating power.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use uncertainty_rs::*;
+    /// # use approx::assert_abs_diff_eq;
+    /// let two = Unc::rel(2.0, 0.01);
+    /// let eight = two.powf(3.0);
+    /// assert_abs_diff_eq!(eight.val(), 8.0);
+    /// assert_abs_diff_eq!(eight.unc(), 0.03);
+    /// ```
+    pub fn powf(self, power: f64) -> RelUnc {
+        RelUnc {
+            val: self.val.powf(power),
+            unc: self.unc * power,
+        }
+    }
+}
+
 impl Uncertainty for RelUnc {
     fn as_ab(self) -> AbUnc {
         Unc::ab(self.val, self.unc * self.val)
