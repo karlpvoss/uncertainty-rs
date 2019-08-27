@@ -3,11 +3,12 @@ name = "uncertainty-rs"
 version = "0.1.0"
 authors = ["Karl Voss <karl.p.voss@gmail.com>"]
 edition = "2018"
+readme = "README.md"
+license-file = "LICENSE"
+description = "A crate to allow the creation and arithmetic operations on numbers with uncertain values."
+keywords = ["float", "uncertain", "arithmetic", "absolute", "relative"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-# num-traits = "0.2.8"
 
 [dev-dependencies]
 approx = "0.3.2"
