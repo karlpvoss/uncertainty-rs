@@ -1,6 +1,9 @@
 use crate::*;
+#[cfg(feature = "serde")]
+use serde::{Serialize, Deserialize};
 
 /// A fieldless struct only used to instantiate AbUnc and RelUnc values.
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Unc;
 
 impl Unc {

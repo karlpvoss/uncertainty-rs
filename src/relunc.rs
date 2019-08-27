@@ -1,8 +1,11 @@
 use crate::*;
 use std::fmt;
+#[cfg(feature = "serde")]
+use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Copy, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct RelUnc {
     pub(crate) val: f64,
     pub(crate) unc: f64,
