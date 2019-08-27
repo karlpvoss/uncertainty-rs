@@ -72,3 +72,21 @@ impl fmt::Display for RelUnc {
         write!(f, "{} ± {}%", self.val, self.unc * 100.0)
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use crate::RelUnc;
+
+    #[test]
+    fn test_send() {
+        fn assert_send<T: Send>() {}
+        assert_send::<RelUnc>();
+    }
+
+    #[test]
+    fn test_sync() {
+        fn assert_sync<T: Sync>() {}
+        assert_sync::<RelUnc>();
+    }
+}

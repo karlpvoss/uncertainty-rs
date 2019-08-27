@@ -34,3 +34,20 @@ impl fmt::Display for AbUnc {
         write!(f, "{} ± {}", self.val, self.unc)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::AbUnc;
+
+    #[test]
+    fn test_send() {
+        fn assert_send<T: Send>() {}
+        assert_send::<AbUnc>();
+    }
+
+    #[test]
+    fn test_sync() {
+        fn assert_sync<T: Sync>() {}
+        assert_sync::<AbUnc>();
+    }
+}
