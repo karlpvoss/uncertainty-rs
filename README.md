@@ -1,4 +1,4 @@
-# uncertainty-rs
+# uncertainty
 
 Unc, or an Uncertainty is a way of representing a numerical value of which the true
 value is not known. The uncertainty can be expressed using absolute uncertainty,
@@ -16,7 +16,7 @@ though they slightly differ in value. This is because there is some overlap betw
 measurements when the uncertainty value is considered. This can be determined as follows:
 
 ```rust
-use uncertainty_rs::*;
+use uncertainty::*;
 
 let one = Unc::ab(14.6, 0.2);
 let two = Unc::rel(14.7, 0.01369);
@@ -29,15 +29,15 @@ can also be raised to [powers](relunc/struct.RelUnc.html#method.powi). To conver
 the two, you can make use of the [Uncertainty](unc/trait.Uncertainty.html) trait.
 
 ```rust
-use uncertainty_rs::*;
+use uncertainty::*;
 use approx::assert_abs_diff_eq;
 
 let one = Unc::ab(14.6, 0.2);
 let two = Unc::rel(14.7, 0.01369);
 let three = Unc::rel(2.0, 0.05);
 
-let eq: AbUnc = one + two.as_ab();
-let eq: RelUnc = eq.as_rel() * three;
+let eq: AbUnc = one + two.to_ab();
+let eq: RelUnc = eq.to_rel() * three;
 
 assert_abs_diff_eq!(eq.val(), 58.6, epsilon = 0.0000001);
 assert_abs_diff_eq!(eq.unc(), 0.0636943, epsilon = 0.0000001);
@@ -63,7 +63,7 @@ the Uncertainty trait:
 
 ```rust
 fn print<T: Uncertainty>(x: T) {
-    let x = x.as_ab();
+    let x = x.to_ab();
     println!("The value is: {}, and the uncertainty is: {}!", x.val(), x.unc());
 }
 
