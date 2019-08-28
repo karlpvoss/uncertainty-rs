@@ -89,7 +89,6 @@ pub mod convert;
 pub mod ops;
 pub mod relunc;
 pub mod unc;
-pub mod vec;
 
 pub use abunc::AbUnc;
 pub use relunc::RelUnc;
