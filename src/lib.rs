@@ -1,7 +1,7 @@
 //! Unc, or an Uncertainty is a way of representing a numerical value of which the true
 //! value is not known. The uncertainty can be expressed using absolute uncertainty,
-//! [ab()](unc/struct.Unc.html#method.ab), or relative uncertainty,
-//! [rel()](unc/struct.Unc.html#method.rel).
+//! [unc::ab()](unc/fn.ab.html), or relative uncertainty,
+//! [unc::rel()](unc/fn.rel.html).
 //!
 //! These can look like so:
 //!
@@ -15,9 +15,8 @@
 //!
 //! ```
 //! use uncertainty::*;
-//!
-//! let one = Unc::ab(14.6, 0.2);
-//! let two = Unc::rel(14.7, 0.01369);
+//! let one = unc::ab(14.6, 0.2);
+//! let two = unc::rel(14.7, 0.01369);
 //! assert!(one.overlap(&two));
 //! ```
 //!
@@ -30,9 +29,9 @@
 //! use uncertainty::*;
 //! use approx::assert_abs_diff_eq;
 //!
-//! let one = Unc::ab(14.6, 0.2);
-//! let two = Unc::rel(14.7, 0.01369);
-//! let three = Unc::rel(2.0, 0.05);
+//! let one = unc::ab(14.6, 0.2);
+//! let two = unc::rel(14.7, 0.01369);
+//! let three = unc::rel(2.0, 0.05);
 //!
 //! let eq: AbUnc = one + two.to_ab();
 //! let eq: RelUnc = eq.to_rel() * three;
@@ -46,7 +45,7 @@
 //! ```
 //! # use uncertainty::*;
 //! # use approx::assert_abs_diff_eq;
-//! let x: AbUnc = Unc::rel(2.0, 0.1).into();
+//! let x: AbUnc = unc::rel(2.0, 0.1).into();
 //! assert_abs_diff_eq!(x.unc(), 0.2);
 //!
 //! let y = AbUnc::from(2.0);
@@ -81,17 +80,16 @@
 //!     println!("The value of this absolute uncertainty is: {}", x.val());
 //! }
 //!
-//! print_ab(Unc::ab(14.7, 0.02));
+//! print_ab(unc::ab(14.7, 0.02));
 //! ```
 
-pub mod abunc;
-pub mod convert;
-pub mod ops;
-pub mod relunc;
+mod abunc;
+mod convert;
+mod ops;
+mod relunc;
 pub mod unc;
 pub mod vec;
 
 pub use abunc::AbUnc;
 pub use relunc::RelUnc;
-pub use unc::Unc;
 pub use unc::Uncertainty;

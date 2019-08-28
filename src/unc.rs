@@ -1,43 +1,33 @@
 use crate::*;
-#[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
 
-/// A fieldless struct only used to instantiate AbUnc and RelUnc values.
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct Unc;
+/// Create an absolute uncertainty. The first parameter is the base value, and the second
+/// parameter is the absolute uncertainty in that value.
+///
+/// # Examples
+///
+/// ```
+/// use uncertainty::*;
+/// let u: AbUnc = unc::ab(10.0, 1.0);
+/// assert_eq!(u.val(), 10.0);
+/// assert_eq!(u.unc(), 1.0);
+/// ```
+pub fn ab(val: f64, unc: f64) -> AbUnc {
+    AbUnc::new(val, unc)
+}
 
-impl Unc {
-    /// Create an absolute uncertainty. The first parameter is the base value, and the second
-    /// parameter is the absolute uncertainty in that value.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// use uncertainty::*;
-    ///
-    /// let u: AbUnc = Unc::ab(10.0, 1.0);
-    /// assert_eq!(u.val(), 10.0);
-    /// assert_eq!(u.unc(), 1.0);
-    /// ```
-    pub fn ab(val: f64, unc: f64) -> AbUnc {
-        AbUnc { val, unc }
-    }
-
-    /// Create a relative uncertainty. The first parameter is the base value, and the second
-    /// parameter is the relative uncertainty in the value, expressed as a decimal fraction.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// use uncertainty::*;
-    ///
-    /// let u: RelUnc = Unc::rel(10.0, 0.1);
-    /// assert_eq!(u.val(), 10.0);
-    /// assert_eq!(u.unc(), 0.1);
-    /// ```
-    pub fn rel(val: f64, unc: f64) -> RelUnc {
-        RelUnc { val, unc }
-    }
+/// Create a relative uncertainty. The first parameter is the base value, and the second
+/// parameter is the relative uncertainty in the value, expressed as a decimal fraction.
+///
+/// # Examples
+///
+/// ```
+/// use uncertainty::*;
+/// let u: RelUnc = unc::rel(10.0, 0.1);
+/// assert_eq!(u.val(), 10.0);
+/// assert_eq!(u.unc(), 0.1);
+/// ```
+pub fn rel(val: f64, unc: f64) -> RelUnc {
+    RelUnc::new(val, unc)
 }
 
 /// Used to define behaviour for values which have uncertain values.
@@ -75,22 +65,5 @@ pub trait Uncertainty: Sized + Copy {
         } else {
             self.max() >= other.min()
         }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::Unc;
-
-    #[test]
-    fn test_send() {
-        fn assert_send<T: Send>() {}
-        assert_send::<Unc>();
-    }
-
-    #[test]
-    fn test_sync() {
-        fn assert_sync<T: Sync>() {}
-        assert_sync::<Unc>();
     }
 }

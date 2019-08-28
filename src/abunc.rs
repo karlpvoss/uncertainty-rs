@@ -1,14 +1,21 @@
 use crate::*;
-use std::fmt;
 #[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Debug, Copy, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct AbUnc {
-    pub(crate) val: f64,
-    pub(crate) unc: f64,
+    val: f64,
+    unc: f64,
+}
+
+impl AbUnc {
+    /// Creates a new absolute uncertainty. See [ab().](unc/fn.ab.html)
+    pub fn new(val: f64, unc: f64) -> AbUnc {
+        AbUnc { val, unc }
+    }
 }
 
 impl Uncertainty for AbUnc {
@@ -17,10 +24,7 @@ impl Uncertainty for AbUnc {
     }
 
     fn to_rel(self) -> RelUnc {
-        RelUnc {
-            val: self.val,
-            unc: self.unc / self.val,
-        }
+        RelUnc::new(self.val, self.unc / self.val)
     }
 
     fn val(&self) -> f64 {

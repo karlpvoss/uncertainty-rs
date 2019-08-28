@@ -24,7 +24,7 @@ impl UncVec {
     /// }
     /// ```
     pub fn ab<T: IntoIterator<Item = f64>>(vals: T, unc: f64) -> Vec<AbUnc> {
-        vals.into_iter().map(|val| Unc::ab(val, unc)).collect()
+        vals.into_iter().map(|val| unc::ab(val, unc)).collect()
     }
 
     /// This is a method which allows the conversion of a list of values into a list of relative
@@ -48,7 +48,7 @@ impl UncVec {
     /// }
     /// ```
     pub fn rel<T: IntoIterator<Item = f64>>(vals: T, unc: f64) -> Vec<RelUnc> {
-        vals.into_iter().map(|val| Unc::rel(val, unc)).collect()
+        vals.into_iter().map(|val| unc::rel(val, unc)).collect()
     }
 }
 

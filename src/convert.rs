@@ -4,13 +4,13 @@ use crate::*;
 
 impl From<f64> for AbUnc {
     fn from(float: f64) -> AbUnc {
-        Unc::ab(float, 0.0)
+        unc::ab(float, 0.0)
     }
 }
 
 impl From<f64> for RelUnc {
     fn from(float: f64) -> RelUnc {
-        Unc::rel(float, 0.0)
+        unc::rel(float, 0.0)
     }
 }
 
@@ -47,7 +47,7 @@ mod tests {
 
     #[test]
     fn rel_from_ab() {
-        let x = Unc::ab(10.0, 1.0).to_rel();
+        let x = unc::ab(10.0, 1.0).to_rel();
 
         assert_abs_diff_eq!(x.val(), 10.0);
         assert_abs_diff_eq!(x.unc(), 0.1);
@@ -55,7 +55,7 @@ mod tests {
 
     #[test]
     fn ab_from_rel() {
-        let x = Unc::rel(10.0, 0.1).to_ab();
+        let x = unc::rel(10.0, 0.1).to_ab();
 
         assert_abs_diff_eq!(x.val(), 10.0);
         assert_abs_diff_eq!(x.unc(), 1.0);
