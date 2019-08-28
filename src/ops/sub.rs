@@ -7,7 +7,7 @@ impl Sub<AbUnc> for AbUnc {
 
     #[allow(clippy::suspicious_arithmetic_impl)]
     fn sub(self, other: Self) -> Self::Output {
-        ab(self.val() - other.val(), self.unc() + other.unc())
+        unc::ab(self.val() - other.val(), self.unc() + other.unc())
     }
 }
 
@@ -34,8 +34,8 @@ mod tests {
 
     #[test]
     fn test_both_unc() {
-        let one = ab(1.0, 0.1);
-        let two = ab(2.0, 0.2);
+        let one = unc::ab(1.0, 0.1);
+        let two = unc::ab(2.0, 0.2);
         let diff = one - two;
 
         assert_abs_diff_eq!(diff.val(), -1.0);
@@ -44,7 +44,7 @@ mod tests {
 
     #[test]
     fn test_left_unc() {
-        let one = ab(1.0, 0.1);
+        let one = unc::ab(1.0, 0.1);
         let two = 2.0;
         let diff = one - two;
 
@@ -55,7 +55,7 @@ mod tests {
     #[test]
     fn test_right_unc() {
         let one = 2.0;
-        let two = ab(1.0, 0.1);
+        let two = unc::ab(1.0, 0.1);
         let diff = one - two;
 
         assert_abs_diff_eq!(diff.val(), -1.0);

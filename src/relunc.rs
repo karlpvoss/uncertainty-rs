@@ -19,7 +19,7 @@ impl RelUnc {
     ///
     /// ```
     /// use uncertainty::*;
-    /// let u: RelUnc = rel(10.0, 0.1);
+    /// let u: RelUnc = unc::rel(10.0, 0.1);
     /// assert_eq!(u.val(), 10.0);
     /// assert_eq!(u.unc(), 0.1);
     /// ```
@@ -35,7 +35,7 @@ impl RelUnc {
     /// ```
     /// # use uncertainty::*;
     /// # use approx::assert_abs_diff_eq;
-    /// let two = rel(2.0, 0.01);
+    /// let two = unc::rel(2.0, 0.01);
     /// let eight = two.powi(3);
     /// assert_abs_diff_eq!(eight.val(), 8.0);
     /// assert_abs_diff_eq!(eight.unc(), 0.03);
@@ -54,7 +54,7 @@ impl RelUnc {
     /// ```
     /// # use uncertainty::*;
     /// # use approx::assert_abs_diff_eq;
-    /// let two = rel(2.0, 0.01);
+    /// let two = unc::rel(2.0, 0.01);
     /// let eight = two.powf(3.0);
     /// assert_abs_diff_eq!(eight.val(), 8.0);
     /// assert_abs_diff_eq!(eight.unc(), 0.03);
@@ -69,7 +69,7 @@ impl RelUnc {
 
 impl Uncertainty for RelUnc {
     fn to_ab(self) -> AbUnc {
-        ab(self.val, self.unc * self.val)
+        unc::ab(self.val, self.unc * self.val)
     }
 
     fn to_rel(self) -> RelUnc {
