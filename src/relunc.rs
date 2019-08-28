@@ -1,17 +1,33 @@
 use crate::*;
-use std::fmt;
 #[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Debug, Copy, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct RelUnc {
-    pub(crate) val: f64,
-    pub(crate) unc: f64,
+    val: f64,
+    unc: f64,
 }
 
 impl RelUnc {
+    /// Create a relative uncertainty. The first parameter is the base value, and the second
+    /// parameter is the relative uncertainty in the value, expressed as a decimal fraction.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use uncertainty::*;
+    ///
+    /// let u: RelUnc = Unc::rel(10.0, 0.1);
+    /// assert_eq!(u.val(), 10.0);
+    /// assert_eq!(u.unc(), 0.1);
+    /// ```
+    pub fn new(val: f64, unc: f64) -> RelUnc {
+        RelUnc { val, unc }
+    }
+
     /// Raise a relative uncertainty to an integer power.
     /// Casts the i32 to an f64 in order to calculate the change in uncertainty.
     ///
@@ -75,7 +91,6 @@ impl fmt::Display for RelUnc {
         write!(f, "{} ± {}%", self.val, self.unc * 100.0)
     }
 }
-
 
 #[cfg(test)]
 mod tests {

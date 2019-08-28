@@ -1,6 +1,6 @@
 use crate::*;
 #[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// A fieldless struct only used to instantiate AbUnc and RelUnc values.
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -20,7 +20,7 @@ impl Unc {
     /// assert_eq!(u.unc(), 1.0);
     /// ```
     pub fn ab(val: f64, unc: f64) -> AbUnc {
-        AbUnc { val, unc }
+        AbUnc::new(val, unc)
     }
 
     /// Create a relative uncertainty. The first parameter is the base value, and the second
@@ -36,7 +36,7 @@ impl Unc {
     /// assert_eq!(u.unc(), 0.1);
     /// ```
     pub fn rel(val: f64, unc: f64) -> RelUnc {
-        RelUnc { val, unc }
+        RelUnc::new(val, unc)
     }
 }
 

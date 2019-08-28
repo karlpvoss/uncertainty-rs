@@ -1,14 +1,32 @@
 use crate::*;
-use std::fmt;
 #[cfg(feature = "serde")]
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Debug, Copy, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct AbUnc {
-    pub(crate) val: f64,
-    pub(crate) unc: f64,
+    val: f64,
+    unc: f64,
+}
+
+impl AbUnc {
+    /// Create an absolute uncertainty. The first parameter is the base value, and the second
+    /// parameter is the absolute uncertainty in that value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use uncertainty::*;
+    ///
+    /// let u: AbUnc = Unc::ab(10.0, 1.0);
+    /// assert_eq!(u.val(), 10.0);
+    /// assert_eq!(u.unc(), 1.0);
+    /// ```
+    pub fn new(val: f64, unc: f64) -> AbUnc {
+        AbUnc { val, unc }
+    }
 }
 
 impl Uncertainty for AbUnc {
@@ -17,10 +35,7 @@ impl Uncertainty for AbUnc {
     }
 
     fn to_rel(self) -> RelUnc {
-        RelUnc {
-            val: self.val,
-            unc: self.unc / self.val,
-        }
+        RelUnc::new(self.val, self.unc / self.val)
     }
 
     fn val(&self) -> f64 {
