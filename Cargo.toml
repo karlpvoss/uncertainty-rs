@@ -5,7 +5,6 @@ authors = ["Karl Voss <karl.p.voss@gmail.com>"]
 edition = "2018"
 readme = "README.md"
 license = "MIT"
-license-file = "LICENSE"
 description = "A crate to allow the creation and arithmetic operations on numbers with uncertain values."
 keywords = ["float", "uncertain", "arithmetic", "absolute", "relative"]
 repository = "https://github.com/karlpvoss/uncertainty-rs"
