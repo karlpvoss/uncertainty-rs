@@ -1,7 +1,7 @@
 //! Unc, or an Uncertainty is a way of representing a numerical value of which the true
 //! value is not known. The uncertainty can be expressed using absolute uncertainty,
-//! [ab()](unc/struct.Unc.html#method.ab), or relative uncertainty,
-//! [rel()](unc/struct.Unc.html#method.rel).
+//! [unc::ab()](unc/fn.ab.html), or relative uncertainty,
+//! [unc::rel()](unc/fn.rel.html).
 //!
 //! These can look like so:
 //!
