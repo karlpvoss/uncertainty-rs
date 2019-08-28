@@ -7,7 +7,7 @@ impl Div<RelUnc> for RelUnc {
 
     #[allow(clippy::suspicious_arithmetic_impl)]
     fn div(self, other: RelUnc) -> Self::Output {
-        Unc::rel(self.val() / other.val(), self.unc() + other.unc())
+        rel(self.val() / other.val(), self.unc() + other.unc())
     }
 }
 
@@ -34,8 +34,8 @@ mod tests {
 
     #[test]
     fn test_both_unc() {
-        let one = Unc::rel(10.0, 0.1);
-        let two = Unc::rel(2.0, 0.1);
+        let one = rel(10.0, 0.1);
+        let two = rel(2.0, 0.1);
         let quot = one / two;
 
         assert_abs_diff_eq!(quot.val(), 5.0);
@@ -44,7 +44,7 @@ mod tests {
 
     #[test]
     fn test_left_unc() {
-        let one = Unc::rel(1.0, 0.1);
+        let one = rel(1.0, 0.1);
         let two = 2.0;
         let quot = one / two;
 
@@ -55,7 +55,7 @@ mod tests {
     #[test]
     fn test_right_unc() {
         let one = 2.0;
-        let two = Unc::rel(1.0, 0.1);
+        let two = rel(1.0, 0.1);
         let quot = one / two;
 
         assert_abs_diff_eq!(quot.val(), 2.0);

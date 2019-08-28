@@ -14,10 +14,11 @@
 //! measurements when the uncertainty value is considered. This can be determined as follows:
 //!
 //! ```
-//! use uncertainty::*;
+//! use uncertainty as unc;
+//! use uncertainty::Uncertainty;
 //!
-//! let one = Unc::ab(14.6, 0.2);
-//! let two = Unc::rel(14.7, 0.01369);
+//! let one = unc::ab(14.6, 0.2);
+//! let two = unc::rel(14.7, 0.01369);
 //! assert!(one.overlap(&two));
 //! ```
 //!
@@ -30,9 +31,9 @@
 //! use uncertainty::*;
 //! use approx::assert_abs_diff_eq;
 //!
-//! let one = Unc::ab(14.6, 0.2);
-//! let two = Unc::rel(14.7, 0.01369);
-//! let three = Unc::rel(2.0, 0.05);
+//! let one = unc::ab(14.6, 0.2);
+//! let two = unc::rel(14.7, 0.01369);
+//! let three = unc::rel(2.0, 0.05);
 //!
 //! let eq: AbUnc = one + two.to_ab();
 //! let eq: RelUnc = eq.to_rel() * three;
@@ -44,12 +45,13 @@
 //! Conversion between the types can also be done via the From trait:
 //!
 //! ```
-//! # use uncertainty::*;
+//! # use uncertainty as unc;
+//! # use uncertainty::Uncertainty;
 //! # use approx::assert_abs_diff_eq;
-//! let x: AbUnc = Unc::rel(2.0, 0.1).into();
+//! let x: unc::AbUnc = unc::rel(2.0, 0.1).into();
 //! assert_abs_diff_eq!(x.unc(), 0.2);
 //!
-//! let y = AbUnc::from(2.0);
+//! let y = unc::AbUnc::from(2.0);
 //! assert_abs_diff_eq!(y.val(), 2.0);
 //! assert_abs_diff_eq!(y.unc(), 0.0);
 //! ```
@@ -76,12 +78,13 @@
 //! do this by using the AbUnc and RelUnc types:
 //!
 //! ```
-//! # use uncertainty::*;
-//! fn print_ab(x: AbUnc) {
+//! # use uncertainty as unc;
+//! # use uncertainty::Uncertainty;
+//! fn print_ab(x: unc::AbUnc) {
 //!     println!("The value of this absolute uncertainty is: {}", x.val());
 //! }
 //!
-//! print_ab(Unc::ab(14.7, 0.02));
+//! print_ab(unc::ab(14.7, 0.02));
 //! ```
 
 pub mod abunc;
@@ -93,5 +96,6 @@ pub mod vec;
 
 pub use abunc::AbUnc;
 pub use relunc::RelUnc;
-pub use unc::Unc;
+pub use unc::ab;
+pub use unc::rel;
 pub use unc::Uncertainty;

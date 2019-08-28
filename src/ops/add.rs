@@ -6,7 +6,7 @@ impl Add<AbUnc> for AbUnc {
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
-        Unc::ab(self.val() + other.val(), self.unc() + other.unc())
+        ab(self.val() + other.val(), self.unc() + other.unc())
     }
 }
 
@@ -33,8 +33,8 @@ mod tests {
 
     #[test]
     fn test_both_unc() {
-        let one = Unc::ab(1.0, 0.1);
-        let two = Unc::ab(2.0, 0.2);
+        let one = ab(1.0, 0.1);
+        let two = ab(2.0, 0.2);
         let sum = one + two;
 
         assert_abs_diff_eq!(sum.val(), 3.0);
@@ -43,7 +43,7 @@ mod tests {
 
     #[test]
     fn test_left_unc() {
-        let one = Unc::ab(1.0, 0.1);
+        let one = ab(1.0, 0.1);
         let two = 2.0;
         let sum = one + two;
 
@@ -54,7 +54,7 @@ mod tests {
     #[test]
     fn test_right_unc() {
         let one = 2.0;
-        let two = Unc::ab(1.0, 0.1);
+        let two = ab(1.0, 0.1);
         let sum = one + two;
 
         assert_abs_diff_eq!(sum.val(), 3.0);
