@@ -16,9 +16,7 @@ though they slightly differ in value. This is because there is some overlap betw
 measurements when the uncertainty value is considered. This can be determined as follows:
 
 ```rust
-use uncertainty as unc;
-use uncertainty::Uncertainty;
-
+use uncertainty::*;
 let one = unc::ab(14.6, 0.2);
 let two = unc::rel(14.7, 0.01369);
 assert!(one.overlap(&two));
@@ -47,10 +45,10 @@ assert_abs_diff_eq!(eq.unc(), 0.0636943, epsilon = 0.0000001);
 Conversion between the types can also be done via the From trait:
 
 ```rust
-let x: unc::AbUnc = unc::rel(2.0, 0.1).into();
+let x: AbUnc = unc::rel(2.0, 0.1).into();
 assert_abs_diff_eq!(x.unc(), 0.2);
 
-let y = unc::AbUnc::from(2.0);
+let y = AbUnc::from(2.0);
 assert_abs_diff_eq!(y.val(), 2.0);
 assert_abs_diff_eq!(y.unc(), 0.0);
 ```
@@ -76,7 +74,7 @@ However, if you only want to accept specifically Relative or Absolute uncertain 
 do this by using the AbUnc and RelUnc types:
 
 ```rust
-fn print_ab(x: unc::AbUnc) {
+fn print_ab(x: AbUnc) {
     println!("The value of this absolute uncertainty is: {}", x.val());
 }
 
