@@ -19,7 +19,7 @@ impl RelUnc {
     ///
     /// ```
     /// use uncertainty::*;
-    /// let u: RelUnc = unc::rel(10.0, 0.1);
+    /// let u: RelUnc = RelUnc::new(10.0, 0.1);
     /// assert_eq!(u.val(), 10.0);
     /// assert_eq!(u.unc(), 0.1);
     /// ```
