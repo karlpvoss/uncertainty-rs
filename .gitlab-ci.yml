@@ -1,9 +1,36 @@
 image: "rust:latest"
 
-test:cargo:
-  script:
-    - rustc --version
-    - cargo --version
-    - cargo test --all --verbose
-    - cargo test --all --verbose --features serde
-    - cargo clippy
+stages:
+    - versions
+    - build
+    - test
+    - clippy
+
+versions:
+    stage: versions
+    script:
+        - rustc --version
+        - cargo --version
+
+build-default:
+    stage: build
+    script: cargo build
+
+build-serde:
+    stage: build
+    script: cargo build --features serde
+
+test-default:
+    stage: test
+    script: cargo test --all --verbose
+
+test-serde:
+    stage: test
+    script: cargo test --all --verbose --features serde
+
+clippy:
+    stage: clippy
+    script:
+        - rustup component add clippy
+        - cargo clippy
+
