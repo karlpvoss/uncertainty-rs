@@ -19,7 +19,7 @@ impl AbUnc {
     ///
     /// ```
     /// use uncertainty::*;
-    /// let u: AbUnc = AbUnc::new(11.0, 1.0);
+    /// let u: AbUnc = AbUnc::new(10.0, 1.0);
     /// assert_eq!(u.val(), 10.0);
     /// assert_eq!(u.unc(), 1.0);
     /// ```
