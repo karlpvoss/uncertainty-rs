@@ -1,35 +1,5 @@
 use crate::*;
 
-/// Create an absolute uncertainty. The first parameter is the base value, and the second
-/// parameter is the absolute uncertainty in that value.
-///
-/// # Examples
-///
-/// ```
-/// use uncertainty::*;
-/// let u: AbUnc = unc::ab(10.0, 1.0);
-/// assert_eq!(u.val(), 10.0);
-/// assert_eq!(u.unc(), 1.0);
-/// ```
-pub fn ab(val: f64, unc: f64) -> AbUnc {
-    AbUnc::new(val, unc)
-}
-
-/// Create a relative uncertainty. The first parameter is the base value, and the second
-/// parameter is the relative uncertainty in the value, expressed as a decimal fraction.
-///
-/// # Examples
-///
-/// ```
-/// use uncertainty::*;
-/// let u: RelUnc = unc::rel(10.0, 0.1);
-/// assert_eq!(u.val(), 10.0);
-/// assert_eq!(u.unc(), 0.1);
-/// ```
-pub fn rel(val: f64, unc: f64) -> RelUnc {
-    RelUnc::new(val, unc)
-}
-
 /// Used to define behaviour for values which have uncertain values.
 pub trait Uncertainty: Sized + Copy {
     /// Convert any uncertainty value into one which has an absolute uncertain value.
