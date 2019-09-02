@@ -2,8 +2,8 @@
 
 Unc, or an Uncertainty is a way of representing a numerical value of which the true
 value is not known. The uncertainty can be expressed using absolute uncertainty,
-[unc::ab()](unc/fn.ab.html), or relative uncertainty,
-[unc::rel()](unc/fn.rel.html).
+[AbUnc::new()](abunc/struct.AbUnc.html), or relative uncertainty,
+[RelUnc::new](relunc/struct.RelUnc.html).
 
 These can look like so:
 
@@ -17,8 +17,8 @@ measurements when the uncertainty value is considered. This can be determined as
 
 ```rust
 use uncertainty::*;
-let one = unc::ab(14.6, 0.2);
-let two = unc::rel(14.7, 0.01369);
+let one = AbUnc::new(14.6, 0.2);
+let two = RelUnc::new(14.7, 0.01369);
 assert!(one.overlap(&two));
 ```
 
@@ -31,9 +31,9 @@ the two, you can make use of the [Uncertainty](unc/trait.Uncertainty.html) trait
 use uncertainty::*;
 use approx::assert_abs_diff_eq;
 
-let one = unc::ab(14.6, 0.2);
-let two = unc::rel(14.7, 0.01369);
-let three = unc::rel(2.0, 0.05);
+let one = AbUnc::new(14.6, 0.2);
+let two = RelUnc::new(14.7, 0.01369);
+let three = RelUnc::new(2.0, 0.05);
 
 let eq: AbUnc = one + two.to_ab();
 let eq: RelUnc = eq.to_rel() * three;
@@ -45,7 +45,7 @@ assert_abs_diff_eq!(eq.unc(), 0.0636943, epsilon = 0.0000001);
 Conversion between the types can also be done via the From trait:
 
 ```rust
-let x: AbUnc = unc::rel(2.0, 0.1).into();
+let x: AbUnc = RelUnc::new(2.0, 0.1).into();
 assert_abs_diff_eq!(x.unc(), 0.2);
 
 let y = AbUnc::from(2.0);
@@ -78,7 +78,7 @@ fn print_ab(x: AbUnc) {
     println!("The value of this absolute uncertainty is: {}", x.val());
 }
 
-print_ab(unc::ab(14.7, 0.02));
+print_ab(AbUnc::new(14.7, 0.02));
 ```
 
 License: MIT
