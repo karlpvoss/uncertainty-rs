@@ -1,7 +1,7 @@
 //! Unc, or an Uncertainty is a way of representing a numerical value of which the true
-//! value is not known. The uncertainty can be expressed using absolute uncertainty,
-//! [AbUnc::new()](abunc/struct.AbUnc.html), or relative uncertainty,
-//! [RelUnc::new](relunc/struct.RelUnc.html).
+//! value is not known. The uncertainty can be expressed using absolute uncertainty
+//! ([AbUnc::new()](abunc/struct.AbUnc.html)) or relative uncertainty
+//! ([RelUnc::new](relunc/struct.RelUnc.html)).
 //!
 //! These can look like so:
 //!
