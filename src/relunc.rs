@@ -12,7 +12,17 @@ pub struct RelUnc {
 }
 
 impl RelUnc {
-    /// Creates a new relative uncertainty. See [rel().](unc/fn.rel.html)
+    /// Create a relative uncertainty. The first parameter is the base value, and the second
+    /// parameter is the relative uncertainty in the value, expressed as a decimal fraction.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use uncertainty::*;
+    /// let u: RelUnc = unc::rel(10.0, 0.1);
+    /// assert_eq!(u.val(), 10.0);
+    /// assert_eq!(u.unc(), 0.1);
+    /// ```
     pub fn new(val: f64, unc: f64) -> RelUnc {
         RelUnc { val, unc }
     }

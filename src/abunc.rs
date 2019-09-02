@@ -12,7 +12,17 @@ pub struct AbUnc {
 }
 
 impl AbUnc {
-    /// Creates a new absolute uncertainty. See [ab().](unc/fn.ab.html)
+    /// Create an absolute uncertainty. The first parameter is the base value, and the second
+    /// parameter is the absolute uncertainty in that value.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use uncertainty::*;
+    /// let u: AbUnc = unc::ab(10.0, 1.0);
+    /// assert_eq!(u.val(), 10.0);
+    /// assert_eq!(u.unc(), 1.0);
+    /// ```
     pub fn new(val: f64, unc: f64) -> AbUnc {
         AbUnc { val, unc }
     }
